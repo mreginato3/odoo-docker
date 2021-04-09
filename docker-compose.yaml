@@ -1,0 +1,30 @@
+version: '2'
+services:
+  db:
+      image: postgres:10
+      environment:
+        - POSTGRES_DB=postgres
+        - POSTGRES_PASSWORD=odoo
+        - POSTGRES_USER=odoo
+        - PGDATA=/var/lib/postgresql/data/pgdata
+      volumes:
+        - db-data:/var/lib/postgresql/data/pgdata
+      network_mode: "bridge"
+      ports:
+        - "5432:5432"
+  odoo:
+    build:
+      context: "./13.0/"
+    links:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./scripts:/home/scripts
+    network_mode: "bridge"
+volumes:
+  odoo-data:
+  db-data:
