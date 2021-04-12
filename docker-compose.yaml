@@ -14,7 +14,7 @@ services:
         - "5432:5432"
   odoo:
     build:
-      context: "./13.0/"
+      context: "./13market/"
     links:
       - db
     ports:

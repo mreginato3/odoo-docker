@@ -78,7 +78,7 @@ RUN chown odoo /etc/odoo/odoo.conf \
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 ENV ODOO_VERSION "13.0"
-RUN git clone --depth=1 --branch=$ODOO_VERSION https://github.com/odoo/odoo /opt/odoo \
+RUN git clone --depth=1 --branch=$ODOO_VERSION https://github.com/odoo/odoo /opt/odoo/ \
         && chown odoo:odoo /opt/odoo/ -R \ 
         && chown odoo:odoo /var/log/odoo/ -R
 
@@ -92,9 +92,21 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
-RUN ln -s /opt/odoo/odoo-bin /usr/bin/odoo
+RUN ln -s /opt/odoo/odoo-bin /usr/local/bin/odoo
 RUN chown -R odoo: /var/lib/odoo
 RUN chown -R odoo: /opt/odoo
+
+# Add repos that you need and have requirements
+RUN mkdir mnt/base-addons \
+        && cd /mnt/base-addons \
+        && git clone https://github.com/ingadhoc/odoo-argentina \
+        && git clone https://github.com/ingadhoc/odoo-argentina-ce \
+        && git clone https://github.com/ingadhoc/account-invoicing \
+        && git clone https://github.com/ingadhoc/account-financial-tools \
+        && git clone https://github.com/ingadhoc/account-payment \
+        && git clone https://github.com/ingadhoc/aeroo_reports.git
+COPY ./requirements.sh /
+RUN sh /requirements.sh && rm /requirements.sh
 
 USER odoo
 
