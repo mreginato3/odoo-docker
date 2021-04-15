@@ -9,11 +9,10 @@
          odoo:
             build:
                 context: "./13market/" # 13market o 13.0 
-        ```
-        
+        ```        
 3.`docker-compose up -d`
 
 Para ingresar al container:
-    `docker exec -it odoo13_odoo_1 bash`
+    -`docker exec -it odoo13_odoo_1 bash`
 Si queremos ingresar como root:
-    `docker exec -it -u root odoo13_odoo_1 bash`
+    -`docker exec -it -u root odoo13_odoo_1 bash`
