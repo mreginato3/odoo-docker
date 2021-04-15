@@ -17,6 +17,7 @@ RUN set -x; \
             node-less \
             python3 \
             python3-pip \
+            swig \
             git \
             python3-dev \
             python3-phonenumbers \
@@ -61,7 +62,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' >> /et
 ## install extra libs
 RUN pip3 install --upgrade pip \
         && pip3 install --upgrade setuptools
-RUN pip3 install pysftp==0.2.8 polib==1.1.0 unicodecsv unidecode email_validator num2words xlwt lxml
+RUN pip3 install pysftp==0.2.8 polib==1.1.0 unicodecsv unidecode email_validator num2words xlwt lxml wheel
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /

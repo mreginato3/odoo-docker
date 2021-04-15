@@ -24,6 +24,8 @@ check_config "db_port" "$PORT"
 check_config "db_user" "$USER"
 check_config "db_password" "$PASSWORD"
 
+path_addons=",/mnt/base-addons/odoo-argentina,/mnt/base-addons/odoo-argentina-ce,/mnt/base-addons/account-invoicing,/mnt/base-addons/account-financial-tools,/mnt/base-addons/account-payment,/mnt/extra-addons/aeroo_reports"
+
 case "$1" in
     -- | odoo)
         shift
@@ -36,7 +38,7 @@ case "$1" in
         ;;
     -*)
         wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        exec odoo "$@" "${DB_ARGS[@]}"
+        exec odoo "$@" "${DB_ARGS[@]}" "--addons-path=$path_addons"
         ;;
     *)
         exec "$@"
