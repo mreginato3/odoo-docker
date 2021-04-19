@@ -12,7 +12,7 @@
         ```        
 3.`docker-compose up -d`
 
-Para ingresar al container:
+* Para ingresar al container:
     -`docker exec -it odoo13_odoo_1 bash`
-Si queremos ingresar como root:
+* Si queremos ingresar como root:
     -`docker exec -it -u root odoo13_odoo_1 bash`
