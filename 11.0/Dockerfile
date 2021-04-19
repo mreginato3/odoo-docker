@@ -63,7 +63,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' >> /et
 RUN pip3 install --upgrade pip \
         && pip3 install --upgrade setuptools
 RUN pip3 install pysftp==0.2.8 polib==1.1.0 unicodecsv unidecode email_validator num2words xlwt lxml \
-        && npm install -g less@3.10.3 less-plugin-clean-css -y
+        && npm install -g less@3.10.3  less-plugin-clean-css -y
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
