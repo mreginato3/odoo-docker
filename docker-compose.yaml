@@ -13,7 +13,7 @@ services:
       ports:
         - "5432:5432"
   odoo:
-    image: odoo13:v2
+    image: regmarcos/odoo:13.0-extended
     links:
       - db
     ports:
